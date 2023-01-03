@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whlg.store.mapper.CartMapper">
+    <resultMap id="CartResultMap" type="com.whlg.store.entity.Product">
+        <result column="big_category" property="bigCategory"></result>
+        <result column="small_category" property="smallCategory"></result>
+        <result column="color_category" property="colorCategory"></result>
+        <result column="sell_point" property="sellPoint"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="sale_num" property="saleNum"></result>
+    </resultMap>
+
+    <insert id="addCartByPid">
+        insert into product (pid, title, price, big_category, small_category, color_category, sell_point, created_time, sale_num, image, stock) VALUES
+ (#{pid}, #{title}, #{price}, #{bigCategory}, #{smallCategory}, #{colorCategory}, #{sellPoint}, #{createdTime}, #{saleNum},#{image},#{stock})
+    </insert>
+    <delete id="deleteBypid">
+        delete from product where pid=#{pid}
+    </delete>
+    <select id="findAllpro" resultMap="CartResultMap">
+        select * from product where pid=#{pid}
+    </select>
+</mapper>

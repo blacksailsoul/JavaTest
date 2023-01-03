@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whlg.store.mapper.AddressMapper">
+    <resultMap id="AddressResultMap" type="com.whlg.store.entity.Address">
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="change_user" property="changeUser"></result>
+        <result column="change_time" property="changeTime"></result>
+        <result column="detail_area" property="detailArea"></result>
+        <result column="post_code" property="postCode"></result>
+    </resultMap>
+    <insert id="insertAddress">
+            insert into address(name,phone,province,city,county,detail_area,post_code,created_user,created_time,change_user,change_time,uid)
+            values (#{name}, #{phone}, #{province}, #{city}, #{county}, #{detailArea}, #{postCode}, #{createdUser}, #{createdTime}, #{changeUser}, #{changeTime},#{uid})
+    </insert>
+    <update id="updateAddress">
+        update address
+        set name=#{name},phone=#{phone},province=#{province},city=#{city},county=#{county},detail_area=#{detailArea},
+            post_code=#{postCode},change_user=#{changeUser},change_time=#{changeTime}
+        where uid=#{uid} and aid=#{aid}
+    </update>
+    <delete id="deleteByAidAndUid">
+        delete from address where aid=#{aid} and uid=#{uid}
+    </delete>
+    <select id="findById" resultMap="AddressResultMap">
+        select * from address where aid=#{aid}
+    </select>
+    <select id="findAll" resultMap="AddressResultMap">
+        select * from address where uid=#{uid}
+    </select>
+
+
+</mapper>

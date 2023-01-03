@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whlg.store.mapper.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="com.whlg.store.entity.Product">
+        <result column="big_category" property="bigCategory"></result>
+        <result column="small_category" property="smallCategory"></result>
+        <result column="color_category" property="colorCategory"></result>
+        <result column="sell_point" property="sellPoint"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="sale_num" property="saleNum"></result>
+    </resultMap>
+
+    <select id="retrieveByPid" resultMap="ProductResultMap">
+        select * from product where pid=#{pid}
+    </select>
+
+    <select id="retrieveByBigCategory" resultMap="ProductResultMap">
+        select * from product where big_category=#{bigCategory}
+    </select>
+
+    <select id="retrieveByBigAndSmallCategory" resultMap="ProductResultMap">
+        select * from product
+        where big_category=#{bigCategory} and small_category=#{smallCategory}
+    </select>
+
+    <select id="retrieveByTime" resultMap="ProductResultMap">
+        select * from product order by created_time desc
+    </select>
+
+    <select id="retrieveBySaleNumUp" resultMap="ProductResultMap">
+        select * from product order by sale_num asc
+    </select>
+
+    <select id="retrieveBySaleNumDown" resultMap="ProductResultMap">
+        select * from product order by sale_num desc
+    </select>
+
+    <select id="retrieveByPriceUp" resultMap="ProductResultMap">
+        select * from product order by price asc
+    </select>
+
+    <select id="retrieveByPriceDown" resultMap="ProductResultMap">
+        select * from product order by price desc
+    </select>
+
+</mapper>
